@@ -1,0 +1,15 @@
+<app-sidebar [navItems]="employeeNavItems"></app-sidebar>
+<app-navbar></app-navbar>
+<div class="pc-container" [ngClass]="{'layout-wrapper': isSidebarHidden}">
+  <div class="pc-content" [ngClass]="{'container': settings.containerWidth}">
+    @if (activePanel.text === "Dashboard") {
+    <app-employee-dashboard></app-employee-dashboard>
+    }@else if(activePanel.text === "Innovation List"){
+    <app-employee-innovation-list></app-employee-innovation-list>
+    }@else if(activePanel.text === "Upload Innovation"){
+    <app-upload-innovations [editInnovation]="editInnovation"></app-upload-innovations>
+    }@else if(activePanel.text === "Others Innovations"){
+    <app-others-innovations></app-others-innovations>
+    }
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<app-sidebar [navItems]="employeeNavItems"></app-sidebar>
+<app-navbar></app-navbar>
+<div class="pc-container" [ngClass]="{'layout-wrapper': isSidebarHidden}">
+    <div class="pc-content" [ngClass]="{'container': settings.containerWidth}">
+        @if (activePanel.text === "Dashboard") {
+            <app-manager-dashboard></app-manager-dashboard>
+        }@else if(activePanel.text === "Innovation List"){
+            <app-innovation-manager-idea-list></app-innovation-manager-idea-list>
+        }
+    </div>
+</div>

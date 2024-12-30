@@ -1,0 +1,90 @@
+<app-breadcrumb [Title]="'Upload Innovation'" [pageTitle]="'Submit Your Idea'"></app-breadcrumb>
+
+<div class="row validate-me">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <div class="text-center">
+                        <h4 class="f-w-500 mb-1">Submit Your Idea</h4>
+                        <p class="mb-3">Collaborate and innovate with your ideas to make a difference.</p>
+                    </div>
+                    <form [formGroup]="ideaSubmissionForm" (ngSubmit)="onSubmit()">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" placeholder="Please Enter Title"
+                                formControlName="title"
+                                [ngClass]="{'error': isFieldInvalid(ideaSubmissionForm, 'title')}" />
+                            <div *ngIf="isFieldInvalid(ideaSubmissionForm, 'title')" class="error-message">
+                                Title is required.
+                            </div>
+                        </div>
+                        <!-- Category -->
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" formControlName="category"
+                                [ngClass]="{'error': isFieldInvalid(ideaSubmissionForm, 'category')}">
+                                <option value="">Select a Category</option>
+                                <option *ngFor="let category of categories" [value]="category">{{ category
+                                    }}</option>
+                            </select>
+                            <div *ngIf="isFieldInvalid(ideaSubmissionForm, 'category')" class="error-message">
+                                Please select a category.
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea rows="8" class="form-control" placeholder="Please Enter Description"
+                                formControlName="description"
+                                [ngClass]="{'error': isFieldInvalid(ideaSubmissionForm, 'description')}"></textarea>
+                            <div *ngIf="isFieldInvalid(ideaSubmissionForm, 'description')" class="error-message">
+                                Description is required.
+                            </div>
+                        </div>
+                        <!-- File Upload -->
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="fileInput" (change)="onFileSelected($event)" />
+                        </div>
+                        <!-- Uploaded Files -->
+                        <div class="file-list">
+                            <ul>
+                                <li *ngFor="let file of uploadedFiles; let i = index" class="file-item">
+                                    <a [href]="file" target="_blank" class="file-link" title="Open File">{{ file }}</a>
+                                    <button type="button" class="delete-btn" (click)="uploadedFiles.splice(i,1)"
+                                        title="Delete File">
+                                        <i class="ti ti-trash f-18"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{editInnovation ? 'Update Innovation': 'Submit Innovation'}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <h3 class="mb-3">Submission Guidelines</h3>
+                    <ul>
+                        <li>Provide a concise and clear title for your idea.</li>
+                        <li>Ensure your description covers key details like benefits and feasibility.</li>
+                        <li>Select the most appropriate category for your idea.</li>
+                        <li>Attach any supporting documents if needed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

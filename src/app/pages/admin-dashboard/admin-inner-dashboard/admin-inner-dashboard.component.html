@@ -1,0 +1,293 @@
+<app-breadcrumb [Title]="'Widget'" [pageTitle]="'Admin Dashboard'"></app-breadcrumb>
+<div class="row">
+    <div class="row">
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Total Employee</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3 justify-content-center">
+                        <h4 class="mb-0">{{this.adminDashboardCount.employeeCount}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Total Innovation User</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3 justify-content-center">
+                        <h4 class="mb-0">{{adminDashboardCount.innovationManagerCount}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Total Decision User</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3 justify-content-center">
+                        <h4 class="mb-0">{{adminDashboardCount.decisionManagerCount}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Innovations</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-1.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{adminDashboardCount.innovationsCount}}
+                            <small class="text-muted">{{adminDashboardCount.totalIdeaCount}}</small>
+                        </h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-success ms-2'">{{adminDashboardCount.innovationPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Innovations Idea</p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-2'" role="progressbar"
+                            [style.width.%]="adminDashboardCount.innovationPercentage"
+                            [attr.aria-valuenow]="adminDashboardCount.innovationPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Productivity</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-2.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{adminDashboardCount.productivityCount}}
+                            <small class="text-muted">{{adminDashboardCount.totalIdeaCount}}</small>
+                        </h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-primary ms-2'">{{adminDashboardCount.productivityPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Productivity Idea</p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-1'" role="progressbar"
+                            [style.width.%]="adminDashboardCount.productivityPercentage"
+                            [attr.aria-valuenow]="adminDashboardCount.productivityPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Cost Saving</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-3.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{adminDashboardCount.costSavingCount}}
+                            <small class="text-muted">{{adminDashboardCount.totalIdeaCount}}</small>
+                        </h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-danger ms-2'">{{adminDashboardCount.costSavingPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Cost Saving Idea
+                    </p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-3'" role="progressbar"
+                            [style.width.%]="adminDashboardCount.costSavingPercentage"
+                            [attr.aria-valuenow]="adminDashboardCount.costSavingPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Submitted</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{adminDashboardCount.submittedCount}}</h4>
+                        <span class="badge bg-light-success ms-2">{{adminDashboardCount.submittedPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">Submitted Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>In Progress</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{adminDashboardCount.inprogressCount}}</h4>
+                        <span class="badge bg-light-warning ms-2">{{adminDashboardCount.inprogressPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">In Progress Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Approved</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{adminDashboardCount.approvedCount}}</h4>
+                        <span class="badge bg-light-primary ms-2">{{adminDashboardCount.approvedPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">Approved Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Rejected</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{adminDashboardCount.rejectedCount}}</h4>
+                        <span class="badge bg-light-primary ms-2">{{adminDashboardCount.rejectedPercentage}}</span>
+                    </div>
+                    <p class="text-muted mb-0">Rejected Innovations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card table-card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Employee List [Latest 10]</h5>
+                    <button class="btn btn-sm btn-link-primary"(click)="gotoUserList('Employee List')">View All</button>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joining Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of employeeList">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img [src]="user.profileImage" alt="user image"
+                                                class="img-radius wid-40 align-top m-r-15" />
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-0">{{ user.firstName }} {{ user.lastName }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt | date:'yyyy/MM/dd'  }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card table-card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Innovation Manager's [Latest 10]</h5>
+                    <button class="btn btn-sm btn-link-primary" (click)="gotoUserList('Innovation Manager List')">View All</button>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joining Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of innovationmanagerList">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img [src]="user.profileImage" alt="user image"
+                                                class="img-radius wid-40 align-top m-r-15" />
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-0">{{ user.firstName }} {{ user.lastName }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card table-card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Decision Manager's [Latest 10]</h5>
+                    <button class="btn btn-sm btn-link-primary" (click)="gotoUserList('Decision Maker List')">View All</button>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joining Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of decisionmanagerList">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img [src]="user.profileImage || '../assets/images/user/avatar-4.jpg'" alt="user image"
+                                                class="img-radius wid-40 align-top m-r-15" />
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-0">{{ user.firstName }} {{ user.lastName }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

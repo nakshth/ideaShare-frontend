@@ -1,0 +1,94 @@
+<nav class="pc-sidebar" [ngClass]="{'pc-sidebar-hide': isSidebarHidden, 'mob-sidebar-active': !isSidebarHidden}"
+    appClickOutside (clickOutside)="closeSidebar()">
+    <div class="navbar-wrapper">
+        <ngx-simplebar [options]="options">
+            <div class="navbar-content">
+                <ul class="pc-navbar">
+                    <ng-container *ngFor="let item of navItems; let i = index; trackBy: trackByMenuIndex">
+                        <li class="pc-caption pc-item">
+                            <label>{{ item.menuName }}</label>
+                        </li>
+                        <ng-container *ngFor="let menuItem of item.menuItems; let j = index; trackBy: trackByMenuIndex">
+                            <li class="pc-hasmenu pc-item" [ngClass]="{'pc-trigger active': menuItem.open }">
+                                <a class="pc-link"
+                                    (click)="toggleCollapse(menuItem)">
+                                    <span class="pc-micon">
+                                        <i [class]="'ph-duotone ' + menuItem.icon"></i>
+                                    </span>
+                                    <span class="pc-mtext" [ngClass]="{'pc-icon-link': menuItem.isLeadingPageIcon}">
+                                        {{ menuItem.text }}
+                                        <i class="ti ti-link text-primary f-14" *ngIf="menuItem.isLeadingPageIcon"></i>
+                                    </span>
+                                    <span class="pc-arrow">
+                                        <i-feather name="chevron-right" *ngIf="menuItem.subMenus?.length"></i-feather>
+                                    </span>
+                                    <span *ngIf="menuItem.badge" class="pc-badge">{{ menuItem.badge }}</span>
+                                </a>
+
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                </ul>
+            </div>
+        </ngx-simplebar>
+        <div class="card pc-user-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img [src]="userInfo.profileImage" alt="user-image"
+                            class="user-avtar wid-45 rounded-circle" />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="dropdown">
+                            <a  class="arrow-none dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" data-bs-offset="0,20">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 me-2">
+                                        <h6 class="mb-0">{{userInfo.firstName}} {{userInfo.lastName}}</h6>
+                                        <small>{{userInfo.role}}</small>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <div class="btn btn-icon btn-link-secondary avtar">
+                                            <i class="ph-duotone ph-windows-logo"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li>
+                                        <a class="pc-user-links">
+                                            <i class="ph-duotone ph-user"></i>
+                                            <span>My Account</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="pc-user-links">
+                                            <i class="ph-duotone ph-gear"></i>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="pc-user-links">
+                                            <i class="ph-duotone ph-lock-key"></i>
+                                            <span>Lock Screen</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="pc-user-links">
+                                            <i class="ph-duotone ph-power"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isSidebarHidden && isMobile" class="pc-menu-overlay" (click)="closeOutSide()"></div>
+    <div *ngIf="isSidebarHidden || !isMobile" (click)="closeOutSide()"></div>
+</nav>

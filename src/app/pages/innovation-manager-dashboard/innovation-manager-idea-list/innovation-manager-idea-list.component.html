@@ -1,0 +1,227 @@
+<app-breadcrumb [Title]="'Widget'" [pageTitle]="'Innovation List'"></app-breadcrumb>
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- [ sample-page ] start -->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-between ali mb-3 g-3">
+                    <div class="col-sm-auto">
+                        <form class="form-search">
+                            <i class="ph-duotone ph-magnifying-glass icon-search"></i>
+                            <input type="search" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
+                                [ngModelOptions]="{standalone: true}" />
+                            <button class="btn btn-light-secondary btn-search">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <select class="form-select" [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}">
+                            <option value="">Select a Status</option>
+                            <option *ngFor="let status of filterStatus" [value]="status">{{ status}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="pc-dt-simple">
+                        <thead>
+                            <tr>
+                                <th style="cursor: pointer;" (click)="sortBy('title')">Title</th>
+                                <th style="cursor: pointer;" (click)="sortBy('category')">Category</th>
+                                <th style="cursor: pointer;" (click)="sortBy('description')">Description</th>
+                                <th>No of Files</th>
+                                <th style="cursor: pointer;" (click)="sortBy('description')">Status</th>
+                                <th style="cursor: pointer;" (click)="sortBy('date')">Submitted Date </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let idea of filteredStudents | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                <td>
+                                    {{idea.title}}
+                                </td>
+                                <td>{{ idea.category }}</td>
+                                <td style="max-width: 150px !important;
+                                overflow: hidden;
+                                text-overflow: ellipsis;">{{ idea.description }}</td> <!-- Ensure this is correct -->
+                                <td>{{ idea?.files?.length }}</td>
+                                <td [title]="idea.status">
+                                    <i [ngClass]="{
+                                        'ph-duotone': true,
+                                        'ph-paper-plane text-primary': idea.status === 'Submitted',
+                                        'ph-x-circle text-danger': idea.status === 'Rejected',
+                                        'ph-clock-countdown text-warning': idea.status === 'In Progress',
+                                        'ph-flag-checkered text-info': idea.status === 'Completed',
+                                        'ph-hourglass text-secondary': idea.status === 'Pending',
+                                        'ph-check-circle text-success': idea.status === 'Approved'
+                                      }" class="f-24"></i>
+                                </td>
+                                <td>{{ idea.updatedAt }}</td>
+                                <td>
+                                    <a class="avtar avtar-xs btn-link-secondary" (click)="showPreview(idea)">
+                                        <i class="ti ti-eye f-20"></i>
+                                    </a>
+                                    <a class="avtar avtar-xs btn-link-secondary" (click)="showActionPopup(idea)">
+                                        <i class="ti ti-edit f-20"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ sample-page ] end -->
+</div>
+<!-- [ Main Content ] end -->
+
+<div class="modal-view-container validate-me">
+    <div #modalView class="modal view" [ngClass]="{'visible': showIdeaPreview}"
+        [ngStyle]="{display:showIdeaPreview ?'block' : 'none'}">
+        <div class="modal-view-details">
+            <h2>Idea Submission Preview</h2>
+            <div class="preview-container">
+                <div>
+                    <div class="preview-section">
+                        <h3>Title</h3>
+                        <p>{{ selectedIdea?.title || 'N/A' }}</p>
+                    </div>
+                    <div class="preview-section">
+                        <h3>Description</h3>
+                        <p>{{ selectedIdea?.description || 'N/A' }}</p>
+                    </div>
+
+                    <!-- Preview Category -->
+                    <div class="preview-section">
+                        <h3>Category</h3>
+                        <p>{{ selectedIdea?.category || 'N/A' }}</p>
+                    </div>
+
+                    <!-- Uploaded Files -->
+                    <div class="file-list">
+                        <ul *ngIf="selectedIdea?.files?.length">
+                            <li *ngFor="let file of selectedIdea.files; let i = index" class="file-item">
+                                <a [href]="file" target="_blank" class="file-link" title="Open File">{{ file }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div style="display: flex;
+                align-items: center;
+                justify-content: end;
+                gap: 11px;">
+                    <button type="button" class="btn btn-secondary" (click)="closePreview()">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal-view-container validate-me">
+    <div #modalView class="modal view" [ngClass]="{'visible': showActionModal}"
+        [ngStyle]="{display:showActionModal ?'block' : 'none'}">
+        <div class="modal-view-details">
+            <div class="container" style="pointer-events: all;">
+                <div class="text-center">
+                    <h4 class="f-w-500 mb-1">Review Innovation</h4>
+                    <p class="mb-3">Analyze the idea, validate it, and then submit feedback.</p>
+                </div>
+                <form [formGroup]="suggestionForm" (ngSubmit)="onSubmit()">
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" formControlName="status"
+                            [ngClass]="{'error': isFieldInvalid(suggestionForm, 'status')}">
+                            <option value="">Select a Status</option>
+                            <option *ngFor="let status of statusList" [value]="status">{{ status
+                                }}</option>
+                        </select>
+                        <div *ngIf="isFieldInvalid(suggestionForm, 'status')" class="error-message">
+                            Please select a Status.
+                        </div>
+                    </div>
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label">Suggestion</label>
+                        <textarea rows="8" class="form-control" placeholder="Add you suggestions"
+                            formControlName="suggestions"
+                            [ngClass]="{'error': isFieldInvalid(suggestionForm, 'suggestions')}">
+                                            </textarea>
+                        <div *ngIf="isFieldInvalid(suggestionForm, 'suggestions')" class="error-message">
+                            Please enter valid points.
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div style="display: flex;
+                        align-items: center;
+                        justify-content: end;
+                        gap: 11px;">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="closesActionPopup()">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-view-container validate-me">
+    <div #modalView class="modal view" [ngClass]="{'visible': showRewardsPoints}"
+        [ngStyle]="{display:showRewardsPoints ?'block' : 'none'}">
+        <div class="modal-view-details">
+            <div class="container" style="pointer-events: all;">
+                <div class="text-center">
+                    <h4 class="f-w-500 mb-1">Rewards Points</h4>
+                </div>
+                <form [formGroup]="rewardsPointsForm" (ngSubmit)="onRewardsPointsSubmit()">
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="form-label">Reward Points</label>
+                        <div class="mb-3">
+                            <input type="number" class="form-control"
+                                [ngClass]="{'error': isFieldInvalid(rewardsPointsForm, 'rewardsPoints')}"
+                                formControlName="rewardsPoints" placeholder="Please Enter Reward Points" />
+                            <div *ngIf="isFieldInvalid(rewardsPointsForm, 'rewardsPoints')" class="error-message">
+                                Please Enter Reward Points
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label">Comments</label>
+                        <textarea rows="8" class="form-control" placeholder="Add you suggestions"
+                            formControlName="comments"
+                            [ngClass]="{'error': isFieldInvalid(rewardsPointsForm, 'comments')}"></textarea>
+                        <div *ngIf="isFieldInvalid(rewardsPointsForm, 'comments')" class="error-message">
+                            Please Add Comments
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div style="display: flex;
+                        align-items: center;
+                        justify-content: end;
+                        gap: 11px;">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="closeRewardsPoints()">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

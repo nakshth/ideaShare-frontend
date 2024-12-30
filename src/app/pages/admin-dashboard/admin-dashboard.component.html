@@ -1,0 +1,28 @@
+<app-sidebar [navItems]="employeeNavItems"></app-sidebar>
+<app-navbar></app-navbar>
+<div class="pc-container" [ngClass]="{'layout-wrapper': isSidebarHidden}">
+    <div class="pc-content" [ngClass]="{'container': settings.containerWidth}">
+        @if (activePanel.text === "Dashboard") {
+        <app-admin-inner-dashboard></app-admin-inner-dashboard>
+        }@else if(activePanel.text === "Innovation List"){
+        <app-innovation-manager-idea-list></app-innovation-manager-idea-list>
+        }@else if(activePanel.text === "Employee List"){
+        <app-employee-list></app-employee-list>
+        }@else if(activePanel.text === "Decision Maker List"){
+        <app-descision-maker-list></app-descision-maker-list>
+        }@else if(activePanel.text === "Innovation Manager List"){
+        <app-innovation-manager-list></app-innovation-manager-list>
+        }
+    </div>
+</div>
+
+<div class="modal-view-container validate-me">
+    <div #modalView class="modal view" [ngClass]="{'visible': showEditModel}"
+        [ngStyle]="{display:showEditConatiner ?'block' : 'none'}">
+        <div class="modal-view-details">
+            <div class="container" style="pointer-events: all;">
+                <app-registration-page></app-registration-page>
+            </div>
+        </div>
+    </div>
+</div>

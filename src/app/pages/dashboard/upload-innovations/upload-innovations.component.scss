@@ -1,0 +1,58 @@
+.file-list {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .file-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .file-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .file-link {
+    color: #007bff;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80%;
+  }
+  
+  .file-link:hover {
+    text-decoration: underline;
+  }
+  
+  .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff4d4f;
+    font-size: 18px;
+    padding: 5px;
+  }
+  
+  .delete-btn:hover {
+    color: #d9363e;
+    transform: scale(1.1);
+  }
+  
+  .ti-trash {
+    font-size: 18px;
+  }
+  

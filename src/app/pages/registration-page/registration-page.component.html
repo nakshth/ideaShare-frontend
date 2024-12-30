@@ -1,0 +1,153 @@
+<div class="loader-bg">
+    <div class="loader-track">
+        <div class="loader-fill"></div>
+    </div>
+</div>
+<!-- [ Pre-loader ] End -->
+<form [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
+    <div class="auth-main v1 validate-me">
+        <div class="auth-wrapper">
+            <div class="auth-form">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h4 class="f-w-500 mb-1">Register with your email</h4>
+                            <p class="mb-3">Already have an Account? <a routerLink="/login-v1" class="link-primary" (click)="openLoginAccount()">Log
+                                    in</a>
+                            </p>
+                        </div>
+                        <div class="align-center">
+                            <img [src]="imageUrl" alt="images" class="img-fluid mb-3 cursor-pointer image-holder" 
+                            (click)="triggerFileInput()"/>
+                            @if (isFieldInvalid(createAccountForm, 'profileImage')) {
+                            <p class="error-message">Please Upload Profile Image</p>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="First Name"
+                                        formControlName="firstName"
+                                        [ngClass]="{'error': isFieldInvalid(createAccountForm, 'firstName')}" />
+                                    @if (isFieldInvalid(createAccountForm, 'firstName')) {
+                                    <p class="error-message"> First Name is required.</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Last Name"
+                                        formControlName="lastName"
+                                        [ngClass]="{'error': isFieldInvalid(createAccountForm, 'lastName')}" />
+                                    @if (isFieldInvalid(createAccountForm, 'lastName')) {
+                                    <p class="error-message"> Last Name is required.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" class="form-control"  style="display: none;"/>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email Address" formControlName="email"
+                                [ngClass]="{'error':isFieldInvalid(createAccountForm,'email')}" />
+                            @if (isFieldInvalid(createAccountForm, 'email')) {
+                            <div class="error-message">
+                                @if (createAccountForm.get('email')?.errors?.['required']) {
+                                <span>Email is required.</span>
+                                }
+                                @if (createAccountForm.get('email')?.errors?.['email']) {
+                                <span>Please enter a valid email address.</span>
+                                }
+                            </div>
+                            }
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" placeholder="Phone number"
+                                formControlName="mobile"
+                                [ngClass]="{'error': isFieldInvalid(createAccountForm, 'mobile')}" />
+                            @if (isFieldInvalid(createAccountForm, 'mobile')) {
+                            <div class="error-message">
+                                @if (createAccountForm.get('mobile')?.errors?.['required']) {
+                                <p>Mobile number is required.</p>
+                                }
+                                @if (createAccountForm.get('mobile')?.errors?.['pattern']) {
+                                <p>Please enter a valid mobile number.</p>
+                                }
+                            </div>
+                            }
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" placeholder="Please select role" formControlName="role"
+                                [ngClass]="{'error': isFieldInvalid(createAccountForm, 'role')}">
+                                <option value="">Please select role</option>
+                                @for (role of roleLists; track $index) {
+                                <option [value]="role.value" selected>{{role.displayName}}</option>
+                                }
+                            </select>
+                            @if (isFieldInvalid(createAccountForm, 'role')) {
+                            <div class="error-message">
+                                @if (createAccountForm.get('role')?.errors?.['required']) {
+                                <span>Role is required.</span>
+                                }
+                            </div>
+                            }
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password"
+                                formControlName="password"
+                                [ngClass]="{'error': isFieldInvalid(createAccountForm, 'password')}" />
+                            @if (isFieldInvalid(createAccountForm, 'password')) {
+                            <div class="error-message">
+                                @if (getPasswordError(createAccountForm, 'required')) {
+                                <p>Password is required.</p>
+                                }
+                            </div>
+                            @if (!getPasswordError(createAccountForm, 'required')) {
+                            <div class="error-message">
+                                @if (getPasswordError(createAccountForm, 'minlength')) {
+                                <p>Password must be at least 6 characters long.</p>
+                                }
+                                @if (getPasswordError(createAccountForm, 'uppercase')) {
+                                <p>Password must contain at least one uppercase letter.</p>
+                                }
+                                @if (getPasswordError(createAccountForm, 'lowercase')) {
+                                <p>Password must contain at least one lowercase letter.</p>
+                                }
+                                @if (getPasswordError(createAccountForm, 'number')) {
+                                <p>Password must contain at least one number.</p>
+                                }
+                                @if (getPasswordError(createAccountForm, 'special')) {
+                                <p>Password must contain at least one special character.</p>
+                                }
+                            </div>
+                            }
+                            }
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Confirm Password"
+                                formControlName="confirmPassword"
+                                [ngClass]="{'error': isFieldInvalid(createAccountForm, 'confirmPassword')}" />
+                            @if (isFieldInvalid(createAccountForm, 'confirmPassword')) {
+                            <p class="error-message">Confirm Password is required.</p>
+                            }
+                            @if (isPasswordMismatch(createAccountForm, 'password', 'confirmPassword')) {
+                            <p class="error-message">Passwords do not match.</p>
+                            }
+                        </div>
+                        <div class="d-flex mt-1 justify-content-between">
+                            <div class="form-check">
+                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                                    [(ngModel)]="isChecked" [ngModelOptions]="{standalone: true}"/>
+                                <label class="form-check-label text-muted" for="customCheckc1">I agree to all the Terms
+                                    &
+                                    Condition</label>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

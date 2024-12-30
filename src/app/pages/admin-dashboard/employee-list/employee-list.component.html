@@ -1,0 +1,62 @@
+<app-breadcrumb [Title]="'Widget'" [pageTitle]="'Employee List'"></app-breadcrumb>
+
+<div class="row">
+    <div class="col-sm-12">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control mb-2" />
+        <div class="card border-0 table-card user-profile-list">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="pc-dt-simple">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Start date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let user of (paginatedUsers | paginate: { itemsPerPage: itemsPerPage, currentPage: p })">
+                                <td>
+                                    <div class="d-inline-block align-middle" style="display: flex !important;
+                                        align-items: center;">
+                                        <img [src]="user.profileImage" alt="user image"
+                                            class="img-radius align-top m-r-15" style="width: 40px" />
+                                        <div class="d-inline-block">
+                                            <h6 class="m-b-0">{{user.firstName}} {{user.lastName}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ user.role }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.mobile }}</td>
+                                <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
+                                <td><span class="badge"
+                                        [ngClass]="{'bg-light-success': user.status === 'Active','bg-light-danger': user.status === 'Disabled' }">
+                                        {{ user.status }}
+                                    </span>
+                                    <div class="overlay-edit">
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item m-0" (click)="deleteUser(user)"><a
+                                                    class="avtar avtar-s btn bg-white btn-link-danger"><i
+                                                        class="ti ti-trash f-18"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!paginatedUsers.length">
+                                <td colspan="6" style="text-align: center;">
+                                    No Records
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>

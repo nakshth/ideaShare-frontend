@@ -1,0 +1,134 @@
+<app-breadcrumb [Title]="'Widget'" [pageTitle]="'Innovation Manager'"></app-breadcrumb>
+<div class="row">
+    <div class="row">
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Innovations</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-1.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{managerDashboardCount.innovationsCount}} <small
+                                class="text-muted">{{managerDashboardCount.totalIdeaCount}}</small></h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-success ms-2'">{{managerDashboardCount.innovationPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Innovations Idea</p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-2'" role="progressbar"
+                            [style.width.%]="managerDashboardCount.innovationPercentage"
+                            [attr.aria-valuenow]="managerDashboardCount.innovationPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Productivity</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-2.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{managerDashboardCount.productivityCount}} <small
+                                class="text-muted">{{managerDashboardCount.totalIdeaCount}}</small></h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-primary ms-2'">{{managerDashboardCount.productivityPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Productivity Idea</p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-1'" role="progressbar"
+                            [style.width.%]="managerDashboardCount.productivityPercentage"
+                            [attr.aria-valuenow]="managerDashboardCount.productivityPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card statistics-card-1">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Cost Saving</h5>
+                </div>
+                <div class="card-body">
+                    <img [src]="'../assets/images/widget/img-status-3.svg'" alt="img" class="img-fluid img-bg h-100">
+                    <div class="d-flex align-items-center">
+                        <h3 class="f-w-300 d-flex align-items-center m-b-0">{{managerDashboardCount.costSavingCount}} <small
+                                class="text-muted">{{managerDashboardCount.totalIdeaCount}}</small></h3>
+                        <span class="badge"
+                            [ngClass]="'bg-light-danger ms-2'">{{managerDashboardCount.costSavingPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-2 text-sm mt-3">Total Cost Saving Idea
+                    </p>
+                    <div class="progress" style="height: 7px">
+                        <div class="progress-bar" [ngClass]="'bg-brand-color-3'" role="progressbar"
+                            [style.width.%]="managerDashboardCount.costSavingPercentage"
+                            [attr.aria-valuenow]="managerDashboardCount.costSavingPercentage" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Submitted</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{managerDashboardCount.submittedCount}}</h4>
+                        <span class="badge bg-light-success ms-2">{{managerDashboardCount.submittedPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">Submitted Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>In Progress</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{managerDashboardCount.inprogressCount}}</h4>
+                        <span class="badge bg-light-warning ms-2">{{managerDashboardCount.inprogressPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">In Progress Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Approved</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{managerDashboardCount.approvedCount}}</h4>
+                        <span class="badge bg-light-primary ms-2">{{managerDashboardCount.approvedPercentage}}%</span>
+                    </div>
+                    <p class="text-muted mb-0">Approved Innovations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3">
+                    <h5>Rejected</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-end mb-3">
+                        <h4 class="mb-0">{{managerDashboardCount.rejectedCount}}</h4>
+                        <span class="badge bg-light-primary ms-2">{{managerDashboardCount.rejectedPercentage}}</span>
+                    </div>
+                    <p class="text-muted mb-0">Rejected Innovations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
